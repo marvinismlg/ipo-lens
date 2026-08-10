@@ -20,7 +20,7 @@ Rate limiting & cached API request data,
 Separation between manually researched metadata and API-generated market data.
 
 ### Project Purpose:
-IPO-LENS was built primarily as a technical and intro quantitative research project.
+IPO-LENS was built primarily as an intro quantitative research & dev project.
 Its purpose is to demonstrate the ability to combine external APIs, historical financial data,
 custom calculations, structured metadata, and UI/UX design into one working python application.
 
