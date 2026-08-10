@@ -19,7 +19,7 @@ Automated comparison of historical IPO lockup performance,
 Rate limiting & cached API request data,
 Separation between manually researched metadata and API-generated market data.
 
-### Project Purpose
+### Project Purpose:
 IPO-LENS was built primarily as a technical and quantitative research project.
 Its purpose is to demonstrate the ability to combine external APIs, historical financial data,
 custom calculations, structured metadata, and UI/UX design into one working python application.
