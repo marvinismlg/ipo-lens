@@ -8,22 +8,23 @@ The backend.py calculates and compares metrics such as valuation, market capital
 IPO-LENS also includes a full CustomTkinter interface that allows users to view SpaceX metrics, comparable IPOs, similarity scores, historical outcomes, and simulated bullish or bearish signals in a simple visual format.
 
 ### Technical Features:
-Python-based backend
-Financial Modeling Prep API integration
-Historical stock and volume time-series analysis
-CSV-based IPO and lockup metadata
-Rule-based similarity scoring
-Quant-oriented IPO event analysis
-CustomTkinter desktop interface
-Automated comparison of historical IPO lockup performance
-Separation between manually researched metadata and API-generated market data
-Project Purpose
+Python backend,
+Financial Modeling Prep API integration,
+Historical stock and volume time-series analysis,
+CSV-based IPO and lockup metadata,
+Rule-based similarity scoring,
+Quant-oriented IPO event analysis,
+CustomTkinter desktop interface,
+Automated comparison of historical IPO lockup performance,
+Rate limiting & cached API request data,
+Separation between manually researched metadata and API-generated market data.
 
+### Project Purpose
 IPO-LENS was built primarily as a technical and quantitative research project.
 Its purpose is to demonstrate the ability to combine external APIs, historical financial data,
 custom calculations, structured metadata, and UI/UX design into one working python application.
 
-### Disclaimer:
+### DISCLAIMER:
 IPO-LENS is not a real stock prediction or investment recommendation tool.
 The project is meant to demonstrate technical depth, API understanding, 
 quantitative analysis, and UI/UX design rather than provide accurate financial forecasts.
