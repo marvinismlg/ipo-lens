@@ -1,2 +1,6 @@
+customtkinter
 yfinance
+requests
 matplotlib
+python-dotenv
+openpyxl
