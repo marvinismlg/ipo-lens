@@ -1,0 +1,13 @@
+﻿url,status,error
+https://www.sec.gov/files/company_tickers.json,200,
+https://data.sec.gov/api/xbrl/companyfacts/CIK0001780312.json,200,
+https://data.sec.gov/submissions/CIK0001780312.json,200,
+https://data.sec.gov/api/xbrl/companyfacts/CIK0001577552.json,200,
+https://data.sec.gov/submissions/CIK0001577552.json,200,
+https://data.sec.gov/api/xbrl/companyfacts/CIK0001326801.json,200,
+https://data.sec.gov/submissions/CIK0001326801.json,200,
+https://data.sec.gov/submissions/CIK0001326801-submissions-002.json,200,
+https://data.sec.gov/api/xbrl/companyfacts/CIK0001819994.json,200,
+https://data.sec.gov/submissions/CIK0001819994.json,200,
+https://data.sec.gov/api/xbrl/companyfacts/CIK0001181412.json,200,
+https://data.sec.gov/submissions/CIK0001181412.json,200,

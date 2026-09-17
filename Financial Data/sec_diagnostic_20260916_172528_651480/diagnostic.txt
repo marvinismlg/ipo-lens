@@ -1,0 +1,98 @@
+IPO LENS SEC DIAGNOSTIC
+Run: 2026-09-16T17:25:28
+Metadata: C:\Users\marvi\PycharmProjects\IPO Lockup Analysis\Financial Data\ipo_metadata.csv
+Read-only with respect to project data. Candidate tags are not validated replacements.
+Company Facts is not the full filing archive. This tool does not parse original filing bodies.
+Literal configuration read from: C:\Users\marvi\PycharmProjects\IPO Lockup Analysis\Financial Data\sec_pipeline.py
+Companies: C:\Users\marvi\PycharmProjects\IPO Lockup Analysis\Financial Data\companies.csv; rows: 9322
+
+COMPANY: ASTS
+Pipeline CIK: 0001780312; current SEC ticker-map CIK: 0001780312
+Company Facts identity: AST SPACEMOBILE, INC.; CIK: 1780312
+Namespaces: dei, us-gaap, ecd, ffd
+DEI SHARE TAG ABSENT. Your .get(..., []) returns an empty list, not an SEC null response.
+DEI shares accepted by current-style filters: 0; first filed: NONE
+Revenue tag us-gaap.RevenueFromContractWithCustomerExcludingAssessedTax: units=['USD']
+Revenue tag us-gaap.Revenues: units=['USD']
+Revenue observations passing current-style filters: 36. Counts include repeated disclosures; TTM is not reconstructed here.
+Share/revenue candidate concept-unit combinations: 43; see concept_inventory.csv.
+Tranche 1 at 2022-04-06: MARKET_CAP_PRESENT_IN_WINDOW; price window=30; market-cap rows=30
+Submissions identity: AST SpaceMobile, Inc.; tickers: ['ASTS']
+Original filing candidates in 2019-04-07 through 2022-04-06: 67
+
+COMPANY: BABA
+Pipeline CIK: 0001577552; current SEC ticker-map CIK: 0001577552
+Company Facts identity: Alibaba Group Holding Limited; CIK: 1577552
+Namespaces: dei, us-gaap
+DEI share tag units: ['shares']
+DEI shares accepted by current-style filters: 13; first filed: 2015-06-25
+Revenue tag us-gaap.RevenueFromContractWithCustomerExcludingAssessedTax: ABSENT
+Revenue tag us-gaap.Revenues: units=['CNY', 'USD']
+Revenue observations passing current-style filters: 16. Counts include repeated disclosures; TTM is not reconstructed here.
+Share/revenue candidate concept-unit combinations: 46; see concept_inventory.csv.
+Tranche 1 at 2024-12-18: MARKET_CAP_PRESENT_IN_WINDOW; price window=30; market-cap rows=30
+Tranche 2 at 2015-03-18: NO_DEI_SHARES_FILED_BY_WINDOW_END; price window=30; market-cap rows=0
+Tranche 3 at 2014-12-18: NO_DEI_SHARES_FILED_BY_WINDOW_END; price window=30; market-cap rows=0
+BABA: verify ordinary-share/ADS ratio and historical currency before using candidate shares/revenue in market cap or price-to-sales. No conversion performed.
+Submissions identity: Alibaba Group Holding Ltd; tickers: ['BABA', 'BABAF', 'BBAAY']
+Original filing candidates in 2012-09-19 through 2024-12-18: 255
+
+COMPANY: META
+Pipeline CIK: 0001326801; current SEC ticker-map CIK: 0001326801
+Company Facts identity: Meta Platforms, Inc.; CIK: 1326801
+Namespaces: dei, us-gaap, srt, ecd, ffd
+DEI SHARE TAG ABSENT. Your .get(..., []) returns an empty list, not an SEC null response.
+DEI shares accepted by current-style filters: 0; first filed: NONE
+Revenue tag us-gaap.RevenueFromContractWithCustomerExcludingAssessedTax: units=['USD']
+Revenue tag us-gaap.Revenues: units=['USD']
+Revenue observations passing current-style filters: 196. Counts include repeated disclosures; TTM is not reconstructed here.
+Share/revenue candidate concept-unit combinations: 59; see concept_inventory.csv.
+Tranche 1 at 2012-08-16: NO_USABLE_DEI_SHARES; price window=30; market-cap rows=0
+Tranche 2 at 2012-10-15: NO_USABLE_DEI_SHARES; price window=30; market-cap rows=0
+Tranche 3 at 2012-11-14: NO_USABLE_DEI_SHARES; price window=30; market-cap rows=0
+Tranche 4 at 2012-12-14: NO_USABLE_DEI_SHARES; price window=30; market-cap rows=0
+Tranche 5 at 2013-05-18: NO_USABLE_DEI_SHARES; price window=30; market-cap rows=0
+Submissions identity: Meta Platforms, Inc.; tickers: ['META']
+Original filing candidates in 2010-05-19 through 2013-05-18: 26
+
+COMPANY: RKLB
+Pipeline CIK: 0001819994; current SEC ticker-map CIK: 0001819994
+Company Facts identity: Rocket Lab Corp; CIK: 1819994
+Namespaces: dei, us-gaap, ecd, ffd
+DEI share tag units: ['shares']
+DEI shares accepted by current-style filters: 21; first filed: 2021-11-15
+Revenue tag us-gaap.RevenueFromContractWithCustomerExcludingAssessedTax: units=['USD']
+Revenue tag us-gaap.Revenues: ABSENT
+Revenue observations passing current-style filters: 64. Counts include repeated disclosures; TTM is not reconstructed here.
+Share/revenue candidate concept-unit combinations: 48; see concept_inventory.csv.
+Tranche 1 at 2022-02-18: MARKET_CAP_PRESENT_IN_WINDOW; price window=30; market-cap rows=30
+Submissions identity: Rocket Lab Corp; tickers: ['RKLB']
+Original filing candidates in 2019-08-26 through 2022-02-18: 54
+
+COMPANY: SPCX
+Pipeline CIK: None; current SEC ticker-map CIK: 0001181412
+PIPELINE MAPPING MISSING: diagnostic may inspect the live mapping, but the supplied SEC repair cannot process this ticker.
+Pipeline taxonomy mapping absent. Diagnostic assumes us-gaap for filter comparison only.
+Company Facts identity: SPACE EXPLORATION TECHNOLOGIES CORP.; CIK: 0001181412
+Namespaces: ffd, us-gaap
+DEI SHARE TAG ABSENT. Your .get(..., []) returns an empty list, not an SEC null response.
+DEI shares accepted by current-style filters: 0; first filed: NONE
+Revenue tag us-gaap.RevenueFromContractWithCustomerExcludingAssessedTax: units=['USD']
+Revenue tag us-gaap.Revenues: ABSENT
+Revenue observations passing current-style filters: 4. Counts include repeated disclosures; TTM is not reconstructed here.
+Share/revenue candidate concept-unit combinations: 16; see concept_inventory.csv.
+Tranche 1 at None: INVALID_LOCKUP_DATE; price window=0; market-cap rows=0
+Tranche 2 at 2026-08-20: MARKET_CAP_PRESENT_IN_WINDOW; price window=30; market-cap rows=30
+Tranche 3 at 2026-09-09: MARKET_CAP_PRESENT_IN_WINDOW; price window=30; market-cap rows=30
+Tranche 4 at 2026-09-10: MARKET_CAP_PRESENT_IN_WINDOW; price window=30; market-cap rows=30
+Submissions identity: SPACE EXPLORATION TECHNOLOGIES CORP; tickers: ['SPCX']
+Original filing candidates in 2024-06-12 through 2026-09-10: 13
+
+LIMITS
+Candidate tags may describe a share class, weighted-average shares, a segment, or a different currency; do not merge automatically.
+Company Facts excludes some custom/dimensional disclosures. Absence here does not establish absence in original filings.
+Filing candidates include historical submissions pages overlapping the metadata period. Their bodies have not been downloaded or parsed.
+No future filings are used to explain pre-lockup eligibility. Filing dates are day-level, matching the pipeline; intraday availability is not modeled.
+This diagnostic does not calculate TTM, validate IPO/lockup metadata or share-unit assumptions, or change scoring rules.
+SEC documentation: https://www.sec.gov/search-filings/edgar-application-programming-interfaces
+SEC archive coverage: https://www.sec.gov/search-filings/edgar-search-assistance/accessing-edgar-data
