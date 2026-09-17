@@ -1,13 +1,4 @@
-"""Verified original-filing fallback for IPO Lens's META/BABA lockup windows.
-
-Place in Financial Data next to sec_pipeline.py. No third-party dependencies.
-Does not import the UI, download Yahoo prices, or rewrite a CSV.
-Functions operate on the rows already loaded by supplement_sec_data.
-Only missing market caps in the supplied pre-lockup windows are repaired.
-BABA's 1:1 ADS conversion is verified from its 2014 IPO prospectus and is
-restricted to the early windows before its first Company Facts annual filing.
-No extrapolation of that conversion into later share splits is permitted.
-"""
+# We need to create a secondary file that imports HTML libraries in order to ensure the SEC API gives us the correct data. Our sec_pipeline alone is not sufficient in generating all the required data we need
 
 import csv
 import datetime
@@ -22,12 +13,14 @@ from urllib.parse import quote
 from urllib.request import Request, urlopen
 from urllib.error import HTTPError, URLError
 
+# We need to create a method to parse the data that we recieve from SEC.
+# Alibaba, due to it not being an american company, has different filing processes which lead to different data structuresd, we need to come up with a way to parse their specific data so it is still readable by our engine
 
-DATE_PATTERN = r"(?:January|February|March|April|May|June|July|August|September|October|November|December)\s+\d{1,2},?\s+\d{4}"
-BABA_IPO_URL = "https://www.sec.gov/Archives/edgar/data/1577552/000119312514347620/d709111d424b4.htm"
-BABA_RATIO_AVAILABLE = "2014-09-22"
-BABA_EARLY_WINDOW_END = "2015-06-24"
-EXPECTED_CIKS = {"META": "0001326801", "BABA": "0001577552"}
+date_pattern = r"(?:January|February|March|April|May|June|July|August|September|October|November|December)\s+\d{1,2},?\s+\d{4}"
+baba_ipo_url = "https://www.sec.gov/Archives/edgar/data/1577552/000119312514347620/d709111d424b4.htm"
+baba_ratio_available = "2014-09-22" # These are the specific dates that we were missing originally, our original ipo_metadata was slightly incorrect, so we have to hardcode the dates in fallback
+baba_early_window_end = "2015-06-24"
+expected_ciks = {"META": "0001326801", "BABA": "0001577552"}
 
 
 def positive_number(value):
@@ -36,6 +29,7 @@ def positive_number(value):
     except (TypeError, ValueError):
         return False
 
+# Our endpoint function, we need to make a destination for our endpoint before we actually begin parsing. SEC also requires a "header" module so to minimize bot requests, we already made this in sec_pipeline, but we will likely need to recreate here just in case fallback is needed at runtime
 
 def fetch_sec_document(url, headers, cache_dir):
     """Cache successful immutable filing responses; fail visibly on HTTP errors."""
@@ -87,7 +81,8 @@ class FilingTextParser(HTMLParser):
         if not self.ignore_depth:
             self.parts.append(data)
 
-
+# SEC Filings are document, not a csv structure, so we will likely need to parse the document and debug that system to make sure it generates accurately.
+# The next few functions will be based on paring the SEC data.
 def filing_text(document):
     parser = FilingTextParser()
     parser.feed(document)
@@ -108,7 +103,7 @@ def extract_meta_filing_shares(document, filed_date, source_url):
     by_date = {}
     pattern = (
         r"Class\s+([AB])\s+Common\s+Stock.{0,150}?"
-        r"([\d,]+)\s+shares\s+outstanding\s+as\s+of\s+(" + DATE_PATTERN + r")"
+        r"([\d,]+)\s+shares\s+outstanding\s+as\s+of\s+(" + date_pattern + r")"
     )
     for match in re.finditer(pattern, text, re.IGNORECASE):
         class_name, value, reported = match.groups()
@@ -120,7 +115,7 @@ def extract_meta_filing_shares(document, filed_date, source_url):
         bucket[class_name.upper()] = value
     # Verified alternate wording in Facebook's 2012 annual report.
     narrative = (
-        r"On\s+(" + DATE_PATTERN + r").{0,100}?"
+        r"On\s+(" + date_pattern + r").{0,100}?"
         r"([\d,]+)\s+shares\s+of\s+Class\s+A\s+common\s+stock\s+and\s+"
         r"([\d,]+)\s+shares\s+of\s+Class\s+B\s+common\s+stock\s+outstanding"
     )
@@ -147,7 +142,7 @@ def extract_meta_filing_shares(document, filed_date, source_url):
 
 def verify_baba_early_ads_ratio(headers, cache_dir):
     """Verify the historical unit in the original prospectus; never guess it."""
-    text = filing_text(fetch_sec_document(BABA_IPO_URL, headers, cache_dir))
+    text = filing_text(fetch_sec_document(baba_ipo_url, headers, cache_dir))
     if "alibaba" not in text.lower() or not re.search(
         r"Each\s+ADS\s+represents\s+one\s+ordinary\s+share", text, re.IGNORECASE
     ):
@@ -157,7 +152,7 @@ def verify_baba_early_ads_ratio(headers, cache_dir):
 
 def extract_baba_filing_shares(document, filed_date, source_url, ordinary_per_ads):
     """Read actual issued/outstanding balance-sheet counts, not IPO projections."""
-    if not BABA_RATIO_AVAILABLE <= filed_date <= BABA_EARLY_WINDOW_END:
+    if not baba_ratio_available <= filed_date <= baba_early_window_end:
         raise ValueError("BABA source falls outside the verified early ADS-conversion scope")
     if ordinary_per_ads != 1.0:
         raise ValueError("Unexpected BABA early ADS ratio")
@@ -166,8 +161,8 @@ def extract_baba_filing_shares(document, filed_date, source_url, ordinary_per_ad
         raise ValueError(f"Unexpected BABA filing identity: {source_url}")
     pattern = (
         r"Ordinary\s+shares,.{0,350}?;\s*([\d,]+)\s+and\s+([\d,]+)\s+shares\s+"
-        r"issued\s+and\s+outstanding\s+as\s+of\s+(" + DATE_PATTERN + r")\s+and\s+"
-        r"(" + DATE_PATTERN + r"),?\s+respectively"
+        r"issued\s+and\s+outstanding\s+as\s+of\s+(" + date_pattern + r")\s+and\s+"
+        r"(" + date_pattern + r"),?\s+respectively"
     )
     counts = {}
     for match in re.finditer(pattern, text, re.IGNORECASE):
@@ -187,13 +182,13 @@ def extract_baba_filing_shares(document, filed_date, source_url, ordinary_per_ad
         "period_date": reported, "available_date": filed_date,
         "shares": float(counts[reported]) / ordinary_per_ads,
         "source_url": source_url, "basis": "Actual ordinary shares / ordinary shares per ADS",
-        "ordinary_per_ads": ordinary_per_ads, "ratio_source_url": BABA_IPO_URL,
+        "ordinary_per_ads": ordinary_per_ads, "ratio_source_url": baba_ipo_url,
     }]
 
-
+# Converting our json into usable csv formats
 def read_filing_catalog(ticker, first_date, last_date, headers, cache_dir):
     """Use submissions plus historical pages, not only the recent filing list."""
-    cik = EXPECTED_CIKS[ticker]
+    cik = expected_ciks[ticker]
     submissions = json.loads(fetch_sec_document(
         f"https://data.sec.gov/submissions/CIK{cik}.json", headers, cache_dir
     ))
@@ -227,14 +222,14 @@ def read_filing_catalog(ticker, first_date, last_date, headers, cache_dir):
 
 
 def get_original_share_records(ticker, first_date, last_date, headers, cache_dir):
-    if ticker not in EXPECTED_CIKS:
+    if ticker not in expected_ciks:
         raise ValueError(f"No verified original-filing parser configured for {ticker}")
-    if ticker == "BABA" and last_date > BABA_EARLY_WINDOW_END:
+    if ticker == "BABA" and last_date > baba_early_window_end:
         raise ValueError("Missing BABA market cap outside verified early windows; verify the later ADS ratio before extending this repair")
     ratio = verify_baba_early_ads_ratio(headers, cache_dir) if ticker == "BABA" else None
     records = []
     for filing in read_filing_catalog(ticker, first_date, last_date, headers, cache_dir):
-        if ticker == "BABA" and filing["filed"] < BABA_RATIO_AVAILABLE:
+        if ticker == "BABA" and filing["filed"] < baba_ratio_available:
             continue
         primary = fetch_sec_document(filing["primary_url"], headers, cache_dir)
         if ticker == "META":
@@ -280,7 +275,7 @@ def repair_lockup_market_caps(company_rows, working_file, headers):
     targets = {}
     for lockup in metadata:
         ticker = lockup["ticker"].strip().upper()
-        if ticker not in EXPECTED_CIKS:
+        if ticker not in expected_ciks:
             continue
         lockup_date = datetime.datetime.strptime(lockup["lockup_date"].strip(), "%Y-%m-%d").date().isoformat()
         history = sorted((row for row in company_rows if row["ticker"] == ticker and row["date"] < lockup_date), key=lambda row: row["date"])
@@ -322,7 +317,7 @@ def repair_lockup_market_caps(company_rows, working_file, headers):
     validate_lockup_market_caps(company_rows, metadata)
     return len(audit)
 
-
+# We will likely need to make an if statement to validate al the data that we generate, we don't need complete error logging as this is a fallback file, however a local errors = [] list would still prove to be useful within the validation function
 def validate_lockup_market_caps(company_rows, metadata):
     """Require a valid market cap on the latest pre-lockup price row."""
     required = {"META", "BABA", "ASTS", "RKLB", "SPCX"}
