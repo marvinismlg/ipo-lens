@@ -157,6 +157,10 @@ def get_benchmark_prices():
 def collect_company_data():
     ticker = SPACEX_TICKER
     hp = get_historical_prices(ticker)
+    if not hp:
+        raise ValueError(
+            f"{ticker}: no price rows from {spacex_ipo_date}"
+        )
     mc = get_market_cap(ticker)
     r = get_revenue(ticker)
     company_record = {

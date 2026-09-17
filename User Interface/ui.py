@@ -140,14 +140,32 @@ def run_backend(mode, ticker=None):
 
     def worker():
         try:
+            print("STEP 1: Starting build_companies()")
             build_companies_module.build_companies()
+            print("STEP 2: build_companies() finished")
+            print("STEP 3: Checking companies.csv")
+            print("companies.csv exists:", os.path.exists(companies_file))
+            if os.path.exists(companies_file):
+                print("companies.csv size:", os.path.getsize(companies_file))
             if not os.path.exists(companies_file) or os.path.getsize(companies_file) == 0:
                 raise FileNotFoundError("Financial Data/companies.csv was not successfully generated.")
+            print("STEP 4: companies.csv validation passed")
             controller_ticker = ticker if ticker else "META"
+            print("STEP 5: Starting engine_controller() with:", controller_ticker)
             result = engine.engine_controller(controller_ticker)
+            print("STEP 6: engine_controller() finished")
+            print("ENGINE RESULT:", result)
             app.after(0, lambda: finish_success(mode, result, ticker, popup, progress))
+
         except Exception as exc:
-            app.after(0, lambda: finish_error(str(exc), popup, progress))
+            import traceback
+
+            message = str(exc)
+
+            print("BACKEND ERROR:", message)
+            traceback.print_exc()
+
+            app.after(0, lambda: finish_error(message, popup, progress))
 
     threading.Thread(target=worker, daemon=True).start()
 

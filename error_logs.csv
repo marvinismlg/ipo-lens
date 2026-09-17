@@ -1,0 +1,88 @@
+20260916-170522,supplement_sec_data,Missing SEC Mapping,Ticker requires SEC supplementation but has no valid CIK or taxonomy mapping,Mid
+20260916-170854,extract_shares_outstanding,Missing Shares Data,No usable SEC shares-outstanding records were found,High
+20260916-170855,extract_shares_outstanding,Missing Shares Data,No usable SEC shares-outstanding records were found,High
+20260916-170855,supplement_sec_data,Missing SEC Mapping,Ticker requires SEC supplementation but has no valid CIK or taxonomy mapping,Mid
+20260916-170857,scoring_function,SPCX Comparison Data,"Invalid comparison SpaceX value (None), skipping record",Mid
+20260916-170857,scoring_function,SPCX Comparison Data,"Invalid comparison SpaceX value (None), skipping record",Mid
+20260916-170857,scoring_function,SPCX Comparison Data,"Invalid comparison SpaceX value (None), skipping record",Mid
+20260916-170857,scoring_function,SPCX Comparison Data,"Invalid comparison SpaceX value (None), skipping record",Mid
+20260916-170857,scoring_function,SPCX Comparison Data,"Invalid comparison SpaceX value (None), skipping record",Mid
+20260916-170857,scoring_function,SPCX Comparison Data,"Invalid comparison SpaceX value (None), skipping record",Mid
+20260916-170857,scoring_function,SPCX Comparison Data,"Invalid comparison SpaceX value (None), skipping record",Mid
+20260916-170857,scoring_function,SPCX Comparison Data,"Invalid comparison SpaceX value (None), skipping record",Mid
+20260916-170857,scoring_function,SPCX Comparison Data,"Invalid comparison SpaceX value (None), skipping record",Mid
+20260916-170857,scoring_function,SPCX Comparison Data,"Invalid comparison SpaceX value (None), skipping record",Mid
+20260916-170857,scoring_function,SPCX Comparison Data,"Invalid comparison SpaceX value (None), skipping record",Mid
+20260916-170857,scoring_function,SPCX Comparison Data,"Invalid comparison SpaceX value (None), skipping record",Mid
+20260916-170857,scoring_function,SPCX Comparison Data,"Invalid comparison SpaceX value (None), skipping record",Mid
+20260916-170857,scoring_function,SPCX Comparison Data,"Invalid comparison SpaceX value (None), skipping record",Mid
+20260916-170857,scoring_function,SPCX Comparison Data,"Invalid comparison SpaceX value (None), skipping record",Mid
+20260916-170857,scoring_function,SPCX Comparison Data,"Invalid comparison SpaceX value (None), skipping record",Mid
+20260916-170857,scoring_function,SPCX Comparison Data,"Invalid comparison SpaceX value (None), skipping record",Mid
+20260916-170857,scoring_function,SPCX Comparison Data,"Invalid comparison SpaceX value (None), skipping record",Mid
+20260916-170857,scoring_function,SPCX Comparison Data,"Invalid comparison SpaceX value (None), skipping record",Mid
+20260916-170857,scoring_function,SPCX Comparison Data,"Invalid comparison SpaceX value (None), skipping record",Mid
+20260916-170857,user_interface_controller,Similarity Scores,Similarity scores cannot be appended due to 0 entries in 'similarity_scores',High
+20260916-171248,extract_shares_outstanding,Missing Shares Data,No usable SEC shares-outstanding records were found,High
+20260916-171249,extract_shares_outstanding,Missing Shares Data,No usable SEC shares-outstanding records were found,High
+20260916-171250,supplement_sec_data,Missing SEC Mapping,Ticker requires SEC supplementation but has no valid CIK or taxonomy mapping,Mid
+20260916-171251,scoring_function,SPCX Comparison Data,"Invalid comparison SpaceX value (None), skipping record",Mid
+20260916-171251,scoring_function,SPCX Comparison Data,"Invalid comparison SpaceX value (None), skipping record",Mid
+20260916-171251,scoring_function,SPCX Comparison Data,"Invalid comparison SpaceX value (None), skipping record",Mid
+20260916-171251,scoring_function,SPCX Comparison Data,"Invalid comparison SpaceX value (None), skipping record",Mid
+20260916-171251,scoring_function,SPCX Comparison Data,"Invalid comparison SpaceX value (None), skipping record",Mid
+20260916-171251,scoring_function,SPCX Comparison Data,"Invalid comparison SpaceX value (None), skipping record",Mid
+20260916-171251,scoring_function,SPCX Comparison Data,"Invalid comparison SpaceX value (None), skipping record",Mid
+20260916-171251,scoring_function,SPCX Comparison Data,"Invalid comparison SpaceX value (None), skipping record",Mid
+20260916-171251,scoring_function,SPCX Comparison Data,"Invalid comparison SpaceX value (None), skipping record",Mid
+20260916-171251,scoring_function,SPCX Comparison Data,"Invalid comparison SpaceX value (None), skipping record",Mid
+20260916-171251,scoring_function,SPCX Comparison Data,"Invalid comparison SpaceX value (None), skipping record",Mid
+20260916-171251,scoring_function,SPCX Comparison Data,"Invalid comparison SpaceX value (None), skipping record",Mid
+20260916-171251,scoring_function,SPCX Comparison Data,"Invalid comparison SpaceX value (None), skipping record",Mid
+20260916-171251,scoring_function,SPCX Comparison Data,"Invalid comparison SpaceX value (None), skipping record",Mid
+20260916-171251,scoring_function,SPCX Comparison Data,"Invalid comparison SpaceX value (None), skipping record",Mid
+20260916-171251,scoring_function,SPCX Comparison Data,"Invalid comparison SpaceX value (None), skipping record",Mid
+20260916-171251,scoring_function,SPCX Comparison Data,"Invalid comparison SpaceX value (None), skipping record",Mid
+20260916-171251,scoring_function,SPCX Comparison Data,"Invalid comparison SpaceX value (None), skipping record",Mid
+20260916-171251,scoring_function,SPCX Comparison Data,"Invalid comparison SpaceX value (None), skipping record",Mid
+20260916-171251,scoring_function,SPCX Comparison Data,"Invalid comparison SpaceX value (None), skipping record",Mid
+20260916-171251,user_interface_controller,Similarity Scores,Similarity scores cannot be appended due to 0 entries in 'similarity_scores',High
+20260916-172504,find_revenue_concept,Missing Revenue Concept,No supported SEC revenue concept was found for this company,High
+20260916-172504,build_ttm_revenue,TTM Revenue Failure,TTM revenue cannot be calculated because no cleaned revenue records were provided,High
+20260916-172504,extract_shares_outstanding,Missing Shares Data,No usable SEC shares-outstanding records were found,High
+20260916-172505,find_revenue_concept,Missing Revenue Concept,No supported SEC revenue concept was found for this company,High
+20260916-172505,build_ttm_revenue,TTM Revenue Failure,TTM revenue cannot be calculated because no cleaned revenue records were provided,High
+20260916-172505,extract_shares_outstanding,Missing Shares Data,No usable SEC shares-outstanding records were found,High
+20260916-172505,find_revenue_concept,Missing Revenue Concept,No supported SEC revenue concept was found for this company,High
+20260916-172505,build_ttm_revenue,TTM Revenue Failure,TTM revenue cannot be calculated because no cleaned revenue records were provided,High
+20260916-172505,supplement_sec_data,Missing SEC Mapping,Ticker requires SEC supplementation but has no valid CIK or taxonomy mapping,Mid
+20260916-172508,scoring_function,SPCX Comparison Data,"Invalid comparison SpaceX value (None), skipping record",Mid
+20260916-172508,scoring_function,SPCX Comparison Data,"Invalid comparison SpaceX value (None), skipping record",Mid
+20260916-172508,scoring_function,SPCX Comparison Data,"Invalid comparison SpaceX value (None), skipping record",Mid
+20260916-172508,scoring_function,SPCX Comparison Data,"Invalid comparison SpaceX value (None), skipping record",Mid
+20260916-172508,scoring_function,SPCX Comparison Data,"Invalid comparison SpaceX value (None), skipping record",Mid
+20260916-172508,scoring_function,SPCX Comparison Data,"Invalid comparison SpaceX value (None), skipping record",Mid
+20260916-172508,scoring_function,SPCX Comparison Data,"Invalid comparison SpaceX value (None), skipping record",Mid
+20260916-172508,scoring_function,SPCX Comparison Data,"Invalid comparison SpaceX value (None), skipping record",Mid
+20260916-172508,scoring_function,SPCX Comparison Data,"Invalid comparison SpaceX value (None), skipping record",Mid
+20260916-172508,scoring_function,SPCX Comparison Data,"Invalid comparison SpaceX value (None), skipping record",Mid
+20260916-172508,scoring_function,SPCX Comparison Data,"Invalid comparison SpaceX value (None), skipping record",Mid
+20260916-172508,scoring_function,SPCX Comparison Data,"Invalid comparison SpaceX value (None), skipping record",Mid
+20260916-172508,scoring_function,SPCX Comparison Data,"Invalid comparison SpaceX value (None), skipping record",Mid
+20260916-172508,scoring_function,SPCX Comparison Data,"Invalid comparison SpaceX value (None), skipping record",Mid
+20260916-172508,scoring_function,SPCX Comparison Data,"Invalid comparison SpaceX value (None), skipping record",Mid
+20260916-172508,scoring_function,SPCX Comparison Data,"Invalid comparison SpaceX value (None), skipping record",Mid
+20260916-172508,scoring_function,SPCX Comparison Data,"Invalid comparison SpaceX value (None), skipping record",Mid
+20260916-172508,scoring_function,SPCX Comparison Data,"Invalid comparison SpaceX value (None), skipping record",Mid
+20260916-172508,scoring_function,SPCX Comparison Data,"Invalid comparison SpaceX value (None), skipping record",Mid
+20260916-172508,scoring_function,SPCX Comparison Data,"Invalid comparison SpaceX value (None), skipping record",Mid
+20260916-172508,user_interface_controller,Similarity Scores,Similarity scores cannot be appended due to 0 entries in 'similarity_scores',High
+20260916-214506,extract_shares_outstanding,Missing Shares Data,No usable SEC shares-outstanding records were found,High
+20260916-214508,supplement_sec_data,Market Cap Failure,Market cap cannot be calculated because the daily close value is missing,High
+20260916-214508,supplement_sec_data,Missing SEC Mapping,Ticker requires SEC supplementation but has no valid CIK or taxonomy mapping,Mid
+20260916-220318,extract_shares_outstanding,Missing Shares Data,No usable SEC shares-outstanding records were found,High
+20260916-220319,supplement_sec_data,Market Cap Failure,Market cap cannot be calculated because the daily close value is missing,High
+20260916-220319,supplement_sec_data,Missing SEC Mapping,Ticker requires SEC supplementation but has no valid CIK or taxonomy mapping,Mid
+20260916-220444,extract_shares_outstanding,Missing Shares Data,No usable SEC shares-outstanding records were found,High
+20260916-220445,supplement_sec_data,Market Cap Failure,Market cap cannot be calculated because the daily close value is missing,High
+20260916-220445,supplement_sec_data,Missing SEC Mapping,Ticker requires SEC supplementation but has no valid CIK or taxonomy mapping,Mid

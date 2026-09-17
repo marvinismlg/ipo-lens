@@ -175,28 +175,53 @@ def get_benchmark_prices():
 
 # The function to organize all the API Financial Data into the fields that go into companies.csv
 def collect_company_data():
-    with open("Financial Data/ipo_metadata.csv", mode="r") as csvfile:
-        reader = csv.DictReader(csvfile)
-        results = []
-        unique_tickers = []
-        for row in reader:
-            if row["ticker"] == "SPCX":
-                continue
+    metadata_path = os.path.join(
+        os.path.dirname(os.path.abspath(__file__)),
+        "ipo_metadata.csv"
+    )
 
-            if row["ticker"] not in unique_tickers:
-                unique_tickers.append(row["ticker"])
-        for t in unique_tickers:
-            hp = get_historical_prices(t)
-            mc = get_market_cap(t)
-            r = get_revenue(t)
-            company_record = {
-                "ticker": t,
-                "historical_prices": hp,
-                "market_cap": mc,
-                "revenue": r
-            }
-            results.append(company_record)
-        return results
+    with open(metadata_path, newline="", encoding="utf-8-sig") as csvfile:
+        metadata_rows = list(csv.DictReader(csvfile))
+
+    ticker_dates = {}
+    for row in metadata_rows:
+        ticker = row["ticker"].strip().upper()
+        if ticker and ticker != "SPCX":
+            ticker_dates.setdefault(ticker, row["ipo_date"].strip())
+
+    required = {"META", "BABA", "RKLB", "ASTS"}
+    missing = required - set(ticker_dates)
+
+    if missing:
+        raise ValueError(
+            f"Metadata missing {sorted(missing)}. "
+            f"Reading: {metadata_path}. "
+            f"Metadata rows: {len(metadata_rows)}"
+        )
+
+    results = []
+
+    for ticker, ipo_date in ticker_dates.items():
+        prices = get_historical_prices(ticker)
+        hp = [
+            record for record in prices
+            if record["date"] >= ipo_date
+        ]
+
+        if not hp:
+            raise ValueError(
+                f"{ticker}: Yahoo returned {len(prices)} price rows; "
+                f"0 remain after IPO date {ipo_date}"
+            )
+
+        results.append({
+            "ticker": ticker,
+            "historical_prices": hp,
+            "market_cap": get_market_cap(ticker),
+            "revenue": get_revenue(ticker),
+        })
+
+    return results
 
 # Writes the companies into the companies.csv in order to be prepared for scoring
 
@@ -255,7 +280,8 @@ def write_company_data(companies_input, output_file):
                     "market_cap": market_cap_by_date.get(current_date),
                     "revenue": revenue,
                     "period": period,
-                    "benchmark_close": benchmark_by_date.get(current_date)
+                    "year": year,
+                    "benchmark_close": benchmark_by_date.get(current_date),
                 }
                 writer.writerow(company_row)
 

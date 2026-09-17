@@ -10,6 +10,9 @@
 
 import csv
 import os
+import math
+from collections import Counter
+import tickers_pipeline
 
 # Here are the main data gathering functions that we will import. We will later run these functions in sequences so they do not overwrite our target csv file
 
@@ -22,6 +25,75 @@ working_file = "Financial Data/temp.csv"
 
 # A simple checker function in order to pinpoint potential minute errors
 
+def export_scoring_data(source_file):
+    numeric_fields = [
+        "close", "market_cap", "revenue", "benchmark_close"
+    ]
+    text_fields = ["ticker", "date", "period", "year"]
+
+    with open(source_file, newline="") as csvfile:
+        reader = csv.DictReader(csvfile)
+        fields = reader.fieldnames
+        rows = list(reader)
+
+    complete = []
+    rejected = []
+    counts = Counter()
+    all_tickers = {row["ticker"] for row in rows}
+
+    for row in rows:
+        problems = []
+
+        for field in numeric_fields:
+            try:
+                value = float(row.get(field, ""))
+                if not math.isfinite(value) or value <= 0:
+                    problems.append(field)
+            except (ValueError, TypeError):
+                problems.append(field)
+
+        for field in text_fields:
+            value = str(row.get(field, "")).strip().lower()
+            if value in {"", "none", "null", "nan"}:
+                problems.append(field)
+
+        if problems:
+            rejected.append({
+                **row,
+                "missing_reason": "Missing or invalid: "
+                    + ", ".join(problems),
+            })
+        else:
+            complete.append(row)
+            counts[row["ticker"]] += 1
+
+    with open(
+        "Financial Data/companies_missing.csv", "w", newline=""
+    ) as csvfile:
+        writer = csv.DictWriter(
+            csvfile, fieldnames=fields + ["missing_reason"]
+        )
+        writer.writeheader()
+        writer.writerows(rejected)
+
+    missing_tickers = all_tickers - set(counts)
+    if missing_tickers:
+        raise ValueError(
+            "No complete scoring rows for: "
+            + ", ".join(sorted(missing_tickers))
+            + ". See companies_missing.csv."
+        )
+
+    with open(
+        "Financial Data/companies_scoring.csv", "w", newline=""
+    ) as csvfile:
+        writer = csv.DictWriter(csvfile, fieldnames=fields)
+        writer.writeheader()
+        writer.writerows(complete)
+
+    print(f"Complete rows: {len(complete)}")
+    print(f"Excluded rows: {len(rejected)}")
+    print(f"Complete rows per ticker: {dict(counts)}")
 def check_csv(working_file):
     if not os.path.exists(working_file):
         raise ValueError("Working_file does not exist")
@@ -48,8 +120,13 @@ def check_csv(working_file):
 
         required_tickers = {"META", "BABA", "RKLB", "ASTS", "SPCX"}
 
-        if not required_tickers.issubset(found_tickers):
-            raise ValueError("Missing required tickers")
+        missing = required_tickers - found_tickers
+        if missing:
+            raise ValueError(
+                f"Missing tickers: {sorted(missing)}. "
+                f"Present tickers: {sorted(found_tickers)}. "
+                f"File: {os.path.abspath(working_file)}"
+            )
     return True
 
 def build_companies():
