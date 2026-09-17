@@ -1,13 +1,4 @@
-"""Verified original-filing fallback for IPO Lens's META/BABA lockup windows.
-
-Place in Financial Data next to sec_pipeline.py. No third-party dependencies.
-Does not import the UI, download Yahoo prices, or rewrite a CSV.
-Functions operate on the rows already loaded by supplement_sec_data.
-Only missing market caps in the supplied pre-lockup windows are repaired.
-BABA's 1:1 ADS conversion is verified from its 2014 IPO prospectus and is
-restricted to the early windows before its first Company Facts annual filing.
-No extrapolation of that conversion into later share splits is permitted.
-"""
+# We need to create a secondary file that imports HTML libraries in order to ensure the SEC API gives us the correct data
 
 import csv
 import datetime
